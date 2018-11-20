@@ -4,8 +4,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def root_page():
-    return ('<html><body><b>Working with containers is super fun!</b>
-    </body></html>')
+    return ('<html><body><b>Working with containers is super fun!</b>' + 
+    '</body></html>')
 
 
 if __name__ == '__main__':
