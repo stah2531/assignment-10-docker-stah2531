@@ -8,6 +8,6 @@ RUN apt-get python-dev -y
 COPY site.py /app/
 COPY requirements.txt /app/
 WORKDIR /app/
-pip install -r requirements.txt
+RUN pip install -r requirements.txt
 ENTRYPOINT ["python"]
 CMD ["site.py"]
