@@ -3,7 +3,7 @@ pipeline {
    stages {
       stage('Linting') {  
          steps { 
-            flake8 https://github.com/seis665/assignment-10-docker-stah2531/app/
+            sh 'flake8 https://github.com/seis665/assignment-10-docker-stah2531/app/'
          }
       }   
       stage('Build') {   
