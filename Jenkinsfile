@@ -3,7 +3,7 @@ pipeline {
    stages {
       stage('Linting') {  
          steps {
-            flake8 app/site.py
+            flake8 /app/site.py
          }
       }   
    }
