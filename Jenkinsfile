@@ -21,8 +21,7 @@ pipeline {
    }
    post {
       always {
-         sh 'docker stop classweb1'
-         sh 'docker rm classweb1'
+         sh 'if [docker ps -q --filter "name=classweb1"] then docker stop classweb1 && docker rm classweb1 fi'
       }
    }
 }
