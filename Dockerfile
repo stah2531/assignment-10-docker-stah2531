@@ -7,8 +7,8 @@ RUN apt-get update
 RUN apt-get install python-pip -y
 RUN apt-get install python-dev -y
 WORKDIR /workspace/docker-pipeline/app/
-COPY site.py /app/site.py
-COPY requirements.txt /app/requirements.txt
+COPY site.py /app/
+COPY requirements.txt /app/
 WORKDIR /app/
 RUN pip install -r requirements.txt
 ENTRYPOINT ["python"]
