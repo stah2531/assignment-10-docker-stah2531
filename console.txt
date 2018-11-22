@@ -1,0 +1,137 @@
+Started by user admin
+Obtained Jenkinsfile from git https://github.com/seis665/assignment-10-docker-stah2531
+Running in Durability level: MAX_SURVIVABILITY
+[Pipeline] node
+Running on e4929c47e930 in /workspace/docker-pipeline
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Fetching changes from the remote Git repository
+Checking out Revision 1fd95e41d59590041f1d4c3d6491d3b51a7bd82c (refs/remotes/origin/master)
+Commit message: "Update Jenkinsfile"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Linting)
+[Pipeline] git
+Fetching changes from the remote Git repository
+Checking out Revision 1fd95e41d59590041f1d4c3d6491d3b51a7bd82c (refs/remotes/origin/master)
+Commit message: "Update Jenkinsfile"
+[Pipeline] sh
++ flake8 app/site.py
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] sh
+ > git rev-parse --is-inside-work-tree # timeout=10
+ > git config remote.origin.url https://github.com/seis665/assignment-10-docker-stah2531 # timeout=10
+Fetching upstream changes from https://github.com/seis665/assignment-10-docker-stah2531
+ > git --version # timeout=10
+using GIT_ASKPASS to set credentials GitHub access token
+ > git fetch --tags --progress https://github.com/seis665/assignment-10-docker-stah2531 +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 1fd95e41d59590041f1d4c3d6491d3b51a7bd82c
+ > git rev-list --no-walk 1fd95e41d59590041f1d4c3d6491d3b51a7bd82c # timeout=10
+ > git rev-parse --is-inside-work-tree # timeout=10
+ > git config remote.origin.url https://github.com/seis665/assignment-10-docker-stah2531 # timeout=10
+Fetching upstream changes from https://github.com/seis665/assignment-10-docker-stah2531
+ > git --version # timeout=10
+using GIT_ASKPASS to set credentials GitHub access token
+ > git fetch --tags --progress https://github.com/seis665/assignment-10-docker-stah2531 +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 1fd95e41d59590041f1d4c3d6491d3b51a7bd82c
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D master # timeout=10
+ > git checkout -b master 1fd95e41d59590041f1d4c3d6491d3b51a7bd82c
++ docker build -t classweb:30 .
+Sending build context to Docker daemon  227.8kB
+
+Step 1/13 : FROM ubuntu:xenial
+ ---> a51debf7e1eb
+Step 2/13 : LABEL maintainer="Elle Stahura"
+ ---> Using cache
+ ---> 24cb1fa3b7ef
+Step 3/13 : LABEL maintainer="stah2531@stthomas.edu"
+ ---> Using cache
+ ---> 289a0910b0fb
+Step 4/13 : EXPOSE 8080
+ ---> Using cache
+ ---> 7d35ea4ade91
+Step 5/13 : RUN apt-get update
+ ---> Using cache
+ ---> e8ff8edf3fde
+Step 6/13 : RUN apt-get install python-pip -y
+ ---> Using cache
+ ---> 083890640ab0
+Step 7/13 : RUN apt-get install python-dev -y
+ ---> Using cache
+ ---> cb919a678918
+Step 8/13 : WORKDIR /workspace/docker-pipeline/
+ ---> Using cache
+ ---> fabeb27e7b5a
+Step 9/13 : COPY app/ app/
+ ---> Using cache
+ ---> e46267e98ccb
+Step 10/13 : WORKDIR app/
+ ---> Using cache
+ ---> ad28b0138a20
+Step 11/13 : RUN pip install -r requirements.txt
+ ---> Using cache
+ ---> a96dd000d0bc
+Step 12/13 : ENTRYPOINT ["python"]
+ ---> Using cache
+ ---> 2d30c2da6ac7
+Step 13/13 : CMD ["site.py"]
+ ---> Using cache
+ ---> 8d2f2ed1a909
+Successfully built 8d2f2ed1a909
+Successfully tagged classweb:30
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] sh
++ docker run -d -p 80:8080 --name classweb1 classweb:30
+2ef8c22da133031e0f0a6a9bb49e48683609abcd9c9566abb7e2cf638e393c61
+[Pipeline] sh
++ grep super
++ curl 169.254.169.254/latest/meta-data/local-ipv4
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    12  100    12    0     0  12000      0 --:--:-- --:--:-- --:--:-- 12000
++ curl 10.120.1.146
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    70  100    70    0     0   2333      0 --:--:-- --:--:-- --:--:--  2333
+<html><body><b>Working with containers is super fun!</b></body></html>
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] sh
++ docker ps -q --filter name=classweb1
++ [ 2ef8c22da133 ]
++ docker stop classweb1
+classweb1
++ docker rm classweb1
+classweb1
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
