@@ -6,10 +6,8 @@ EXPOSE 8080
 RUN apt-get update
 RUN apt-get install python-pip -y
 RUN apt-get install python-dev -y
-WORKDIR /workspace/docker-pipeline/app/
-RUN pwd
-RUN ls
-COPY site.py /app/
+WORKDIR /workspace/docker-pipeline/
+COPY app/ /app/
 COPY requirements.txt /app/
 WORKDIR /app/
 RUN pip install -r requirements.txt
