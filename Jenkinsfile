@@ -21,8 +21,8 @@ pipeline {
    }
    post {
       always {
-         sh 'docker stop classweb'
-         sh 'docker rm classweb'
+         sh 'docker stop classweb1'
+         sh 'docker rm classweb1'
       }
    }
 }
