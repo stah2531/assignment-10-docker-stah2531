@@ -19,4 +19,10 @@ pipeline {
          }
       }
    }
+   post {
+      always {
+         sh 'docker stop classweb'
+         sh 'docker rm classweb'
+      }
+   }
 }
