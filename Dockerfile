@@ -4,8 +4,8 @@ LABEL maintainer="Elle Stahura"
 LABEL maintainer="stah2531@stthomas.edu"
 EXPOSE 8080
 RUN apt-get update
-RUN apt-get install python-pip
-RUN apt-get install python-dev
+RUN apt-get install python-pip -y
+RUN apt-get install python-dev -y
 COPY site.py /app/
 COPY requirements.txt /app/
 WORKDIR /app/
