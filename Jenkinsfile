@@ -3,7 +3,6 @@ pipeline {
    stages {
       stage('Linting') {  
          steps {
-            git credentialsId: '8c4f7383-a103-4f59-8397-13804a0dc72a', url: 'https://github.com/seis665/assignment-10-docker-stah2531/'
             sh 'flake8 app/site.py'
          }
       }
